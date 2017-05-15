@@ -1,0 +1,2 @@
+SSL生成证书：
+>keytool -genkey -alias tomcat -keypass 123456 -keyalg RSA -keysize 1024 -validity 365 -keystore E:/tomcat.keystore -storepass 123456
