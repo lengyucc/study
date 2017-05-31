@@ -1,0 +1,15 @@
+insert into person (id,name,age,address) values (123,'zhangsan23',131,'杭州113');
+insert into person (id,name,age,address) values (124,'zhangsan24',141,'杭州114');
+insert into person (id,name,age,address) values (125,'zhangsan25',151,'杭州115');
+insert into person (id,name,age,address) values (126,'zhangsan26',161,'杭州116');
+insert into person (id,name,age,address) values (127,'zhangsan27',171,'杭州117');
+insert into person (id,name,age,address) values (128,'zhangsan28',181,'杭州118');
+insert into person (id,name,age,address) values (129,'zhangsan29',191,'杭州119');
+insert into person (id,name,age,address) values (110,'zhangsan10',101,'杭州110');
+insert into person (id,name,age,address) values (111,'zhangsan11',111,'杭州111');
+insert into person (id,name,age,address) values (112,'zhangsan12',121,'杭州112');
+insert into person (id,name,age,address) values (113,'zhangsan13',131,'杭州113');
+insert into person (id,name,age,address) values (114,'zhangsan14',141,'杭州114');
+insert into person (id,name,age,address) values (115,'zhangsan15',151,'杭州115');
+insert into person (id,name,age,address) values (116,'zhangsan16',161,'杭州116');
+insert into person (id,name,age,address) values (117,'zhangsan17',171,'杭州117');
