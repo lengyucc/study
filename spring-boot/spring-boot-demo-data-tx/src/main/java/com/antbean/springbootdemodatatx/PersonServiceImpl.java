@@ -10,7 +10,7 @@ public class PersonServiceImpl implements PersonService {
 	@Autowired
 	PersonRepository personRepository;
 
-	@Transactional(rollbackFor = { IllegalArgumentException.class })
+	@Transactional/*(rollbackFor = { IllegalArgumentException.class })*/
 	@Override
 	public Person savePersonWithRollBack(Person person) {
 		Person p = personRepository.save(person);
@@ -20,7 +20,7 @@ public class PersonServiceImpl implements PersonService {
 		return p;
 	}
 
-	@Transactional/*(noRollbackFor = { IllegalArgumentException.class })*/
+	@Transactional(noRollbackFor = { IllegalArgumentException.class })
 	@Override
 	public Person savePersonWithoutRollBack(Person person) {
 		Person p = personRepository.save(person);
