@@ -8,6 +8,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
@@ -22,18 +23,21 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.validator.Validator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
-//@Configuration
+@Configuration
 @EnableBatchProcessing // 开启批处理支持
-public class CsvBatchConfig {
+public class TriggerBatchConfig {
 	@Bean
-	public ItemReader<Person> reader() throws Exception {
+	@StepScope
+	public FlatFileItemReader<Person> reader(@Value("#{jobParameters['input.file.name']}") String pathToFile)
+			throws Exception {
 		FlatFileItemReader<Person> reader = new FlatFileItemReader<Person>(); // 使用FlatFileItemReader读取文件
-		reader.setResource(new ClassPathResource("people.csv")); // 使用FlatFileItemReader的setResource方法设置csv文件路径
+		reader.setResource(new ClassPathResource(pathToFile)); // 使用FlatFileItemReader的setResource方法设置csv文件路径
 		reader.setLineMapper(new DefaultLineMapper<Person>() { // 对csv文件数据和领域模型类做对应映射
 			{
 				setLineTokenizer(new DelimitedLineTokenizer() {
@@ -59,11 +63,12 @@ public class CsvBatchConfig {
 	}
 
 	@Bean
-	public ItemWriter<Person> writer(DataSource dataSource) {	// Spring能让容器中已有的bean以参数形式注入,spring boot已为我们定义了DataSource
-		JdbcBatchItemWriter<Person> writer = new JdbcBatchItemWriter<Person>();	// 使用jdbc批处理JdbcBatchItemWriter来讲数据写到数据库
+	public ItemWriter<Person> writer(DataSource dataSource) { // Spring能让容器中已有的bean以参数形式注入,spring
+																// boot已为我们定义了DataSource
+		JdbcBatchItemWriter<Person> writer = new JdbcBatchItemWriter<Person>(); // 使用jdbc批处理JdbcBatchItemWriter来讲数据写到数据库
 		writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Person>());
 		String sql = "insert into PERSON (name, age, nation, address) values (:name, :age, :nation, :address)";
-		writer.setSql(sql);	// 设置要执行批处理的sql语句
+		writer.setSql(sql); // 设置要执行批处理的sql语句
 		writer.setDataSource(dataSource);
 		return writer;
 	}

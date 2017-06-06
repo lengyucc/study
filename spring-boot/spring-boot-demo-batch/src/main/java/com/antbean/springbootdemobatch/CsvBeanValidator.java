@@ -14,15 +14,17 @@ public class CsvBeanValidator<T> implements Validator<T>, InitializingBean {
 	private javax.validation.Validator validator;
 
 	@Override
-	public void afterPropertiesSet() throws Exception {	// 1 使用JSR-303的validator来校验数据,在此处进行JSR-303的validator的初始化
+	public void afterPropertiesSet() throws Exception { // 1
+														// 使用JSR-303的validator来校验数据,在此处进行JSR-303的validator的初始化
 		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 		validator = validatorFactory.usingContext().getValidator();
 	}
 
 	@Override
 	public void validate(T value) throws ValidationException {
-		Set<ConstraintViolation<T>> constraintViolations = validator.validate(value);	// 2 校验数据
-		if(constraintViolations.size() > 0){
+		Set<ConstraintViolation<T>> constraintViolations = validator.validate(value); // 2
+																						// 校验数据
+		if (constraintViolations.size() > 0) {
 			StringBuffer message = new StringBuffer();
 			for (ConstraintViolation<T> constraintViolation : constraintViolations) {
 				message.append(constraintViolation.getMessage() + "\n");
@@ -30,27 +32,5 @@ public class CsvBeanValidator<T> implements Validator<T>, InitializingBean {
 			throw new ValidationException(message.toString());
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
