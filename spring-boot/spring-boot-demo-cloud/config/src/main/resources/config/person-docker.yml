@@ -1,0 +1,10 @@
+spring:
+ jpa:
+  database: MYSQL
+ datasource:
+  platform: mysql
+  url: jdbc:mysql://bdm253827559.my3w.com:3306/bdm253827559_db?useUnicode=true&amp;characterEncoding=UTF-8
+  username: bdm253827559
+  password: ming1234
+  dirver-class-name: com.mysql.jdbc.Driver
+  
