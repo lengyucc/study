@@ -14,9 +14,9 @@ public class PersonController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Object savePerson(@RequestBody String personName) {
+		System.out.println("PersonController.savePerson() ################");
 		Person p = new Person(personName);
 		personRepository.save(p);
-
 		return personRepository.findAll(new PageRequest(0, 10)).getContent();
 	}
 }
