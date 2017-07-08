@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class NumberValidator extends Validator {
 
 	public static void main(String[] args) {
-		new NumberValidator().validate("18.01", "年龄", "rangeIn(18,160)");
+		validate("18.01", "年龄", "rangeIn(18,160)");
 	}
 
 	public static void validate(Object t, String name, String... args) {

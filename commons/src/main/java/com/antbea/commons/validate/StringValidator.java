@@ -6,7 +6,7 @@ import java.math.BigInteger;
 public class StringValidator extends Validator {
 
 	public static void main(String[] args) {
-		new StringValidator().validate("1222", "姓名", "decimal");
+		validate("1222", "姓名", "decimal");
 	}
 
 	public static void validate(String t, String name, String... args) {
