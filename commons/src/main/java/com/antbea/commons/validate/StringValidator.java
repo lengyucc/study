@@ -7,6 +7,7 @@ public class StringValidator extends Validator {
 
 	public static void main(String[] args) {
 		validate("1222", "姓名", "decimal");
+		
 	}
 
 	public static void validate(String t, String name, String... args) {
