@@ -1,3 +1,4 @@
+package com.antbea.commons.enumeration;
 
 
 public enum AccountTypeEnum {
